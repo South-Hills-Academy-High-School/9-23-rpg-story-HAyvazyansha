@@ -13,6 +13,7 @@ namespace AnyProp {
     export const ChoiceResults = AnyProp.create()
     export const Choice1 = AnyProp.create()
     export const Choice2 = AnyProp.create()
+    export const Choices = AnyProp.create()
 }
 /**
  * Cloud portraits:
@@ -160,6 +161,9 @@ function printCurrentScript () {
         }
     })
 }
+function nomoneyforyou () {
+	
+}
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
     if (choiceIndex == 0) {
         choiceIndex = 1
@@ -172,6 +176,15 @@ function createScript (characterName: string, text: string, portrait: number) {
     blockObject.setStringProperty(newScript, StrProp.Text, text)
     blockObject.setNumberProperty(newScript, NumProp.Portrait, portrait)
     return newScript
+}
+function iamoldman () {
+    oldman1 = createScript("Mr. Kao", "I'm just an old man and I spent all my money gombling, please help me!!! ", 3)
+    oldman2 = createScript("Pineapple", "Ok, just give me $2 and I will get you water", 3)
+    blockObject.setAnyProperty(oldman1, AnyProp.NextPage, oldman2)
+    blockObject.setAnyProperty(oldman2, AnyProp.Choices, ["Ok hers 2$!", "NO MONEY FOR YOU"])
+    blockObject.setAnyProperty(oldman2, AnyProp.Choice1, happyEnding())
+    blockObject.setAnyProperty(oldman2, AnyProp.Choice2, 0)
+    return oldman1
 }
 function livesAreAtStake () {
     lives1 = createScript("Old Man", "LIVES ARE AT STAKE! I AM RESPONSIBLE FOR THESE PLANTS AND THEIR WATER INTAKE!!!", 2)
@@ -207,6 +220,8 @@ let itsOkaySecond: blockObject.BlockObject = null
 let itsOkayFirst: blockObject.BlockObject = null
 let lives2: blockObject.BlockObject = null
 let lives1: blockObject.BlockObject = null
+let oldman2: blockObject.BlockObject = null
+let oldman1: blockObject.BlockObject = null
 let newScript: blockObject.BlockObject = null
 let printingStuff = false
 let FinalChoice2: blockObject.BlockObject = null
